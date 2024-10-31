@@ -7,7 +7,7 @@ class Node:
         self.value = value
 
 
-def node_to_string(node):
+def node_to_xml(node):
     if not type(node.value) is list:
         return f"{node.tag} - {node.value}\n"
     else:

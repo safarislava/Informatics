@@ -1,50 +1,42 @@
-from parser.utils import *
+from parser.utils import remove_front_spaces, count_front_spaces
 
 
 def parse(file):
-    xml = parse_string(file.read())
-    xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + xml
-    return xml
+    xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
 
+    spacing_list = []
+    tag_list = []
 
-def parse_string(s, parent_tag=""):
-    spacing = count_front_spaces(s)
+    for line in file.readlines():
+        spacing = count_front_spaces(line.split(":", 1)[0])
 
-    parents = []
-    parent = s.split("\n", 1)[0] + "\n"
-    for line in s.split("\n")[1:-1]:
-        if count_front_spaces(line) == spacing:
-            parents.append(parent)
-            parent = line + "\n"
-        else:
-            parent += line + "\n"
-    parents.append(parent)
+        if len(spacing_list) > 0:
+            while spacing_list[-1] >= spacing:
+                xml += " " * spacing_list[-1] + f"</{tag_list[-1]}>\n"
+                spacing_list.pop()
+                tag_list.pop()
 
-    xml = ""
-    for parent in parents:
-        tag = remove_front_spaces(parent.split(":", 1)[0])
-
+        tag = remove_front_spaces(line.split(":", 1)[0])
         if tag[0] == "-":
-            xml += f"<{parent_tag}>\n"
-            xml += add_tab(parse_string(parent.replace("-", " ", 1)))
-            xml += f"</{parent_tag}>\n"
-            continue
+            tag = tag[2:]
+            spacing += 2
 
-        value = parent.split(":", 1)[1]
+            if xml.split("\n")[-2] != " " * spacing_list[-1] + f"<{tag_list[-1]}>":
+                xml += " " * spacing_list[-1] + f"</{tag_list[-1]}>\n"
+                xml += " " * spacing_list[-1] + f"<{tag_list[-1]}>\n"
 
-        if value.count("\n") == 1:
-            value = value.split("\n", 1)[0][1:]
-            xml += f"<{tag}>{value}</{tag}>\n"
-            continue
+        value = line.split(":", 1)[1][1:].split("\n", 1)[0]
 
-        children = parent.split("\n", 1)[1]
+        spacing_list.append(spacing)
+        tag_list.append(tag)
 
-        if remove_front_spaces(children)[0] == "-":
-            xml += parse_string(children, tag)
-            continue
+        xml += spacing * " " + f"<{tag}>\n"
+        if value != "":
+            xml += spacing * "  " + f"{value}\n"
 
-        xml += f"<{tag}>\n"
-        xml += add_tab(parse_string(children))
-        xml += f"</{tag}>\n"
+    while spacing_list:
+        xml += " " * spacing_list[-1] + f"</{tag_list[-1]}>\n"
+        spacing_list.pop()
+        tag_list.pop()
 
     return xml

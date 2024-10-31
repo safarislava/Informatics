@@ -2,11 +2,12 @@ from parser.utils import *
 
 
 def parse(file):
-    xml = parse_string(file.read())
-    return xml[0]
+    tree = parse_tree(file.read())[0]
+    xml = tree_to_xml(tree)
+    return xml
 
 
-def parse_string(s, parent_tag=""):
+def parse_tree(s, parent_tag=""):
     spacing = count_front_spaces(s)
 
     parents = []
@@ -25,7 +26,7 @@ def parse_string(s, parent_tag=""):
 
         if tag[0] == "-":
             node = Node(parent_tag)
-            node.value = parse_string(parent.replace("-", " ", 1))
+            node.value = parse_tree(parent.replace("-", " ", 1))
             res.append(node)
             continue
 
@@ -39,12 +40,23 @@ def parse_string(s, parent_tag=""):
         children = parent.split("\n", 1)[1]
 
         if remove_front_spaces(children)[0] == "-":
-            for i in parse_string(children, tag):
+            for i in parse_tree(children, tag):
                 res.append(i)
             continue
 
         node = Node(tag)
-        node.value = parse_string(children)
+        node.value = parse_tree(children)
         res.append(node)
 
     return res
+
+
+def tree_to_xml(node):
+    if not type(node.value) is list:
+        return f"<{node.tag}>{node.value}</{node.tag}>\n"
+    else:
+        s = f"<{node.tag}>\n"
+        for i in node.value:
+            s += add_tab(tree_to_xml(i))
+        s += f"</{node.tag}>\n"
+        return s
