@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<days>
+	<monday>
+		<count_lessons>5</count_lessons>
+		<lesson>
+			<name>Программирование</name>
+			<type>Лабораторная</type>
+			<time>8:20-9:50</time>
+			<lector>Данилов Павел Юрьевич</lector>
+			<place>Ауд. 1338, Кронверкский пр., д.49, лит.А</place>
+		</lesson>
+		<lesson>
+			<name>Программирование</name>
+			<type>Лабораторная</type>
+			<time>10:00-11:30</time>
+			<lector>Данилов Павел Юрьевич</lector>
+			<place>Ауд. 1338, Кронверкский пр., д.49, лит.А</place>
+		</lesson>
+		<lesson>
+			<name>Линейная алгебра</name>
+			<type>Лекция</type>
+			<time>15:20-16:50</time>
+			<lector>Карпов Дмитрий Валерьевич</lector>
+			<place>Ауд. 1404, Кронверкский пр., д.49, лит.А</place>
+		</lesson>
+		<lesson>
+			<name>Линейная алгебра</name>
+			<type>Практика</type>
+			<time>17:00-18:30</time>
+			<lector>Карпов Дмитрий Валерьевич</lector>
+			<place>Ауд. 2414, Кронверкский пр., д.49, лит.А</place>
+		</lesson>
+		<lesson>
+			<name>Велоспорт</name>
+			<type>Спорт</type>
+			<time>19:30-21:00</time>
+			<lector>Селищев Роман Александрович</lector>
+			<place>Ауд. Локосфинкс, Северная дорога, 12А</place>
+		</lesson>
+	</monday>
+	<saturday>
+		<count_lessons>4</count_lessons>
+		<lesson>
+			<name>Математический анализ</name>
+			<type>Лекция</type>
+			<time>8:20-9:50</time>
+			<lector>Холодова Светлана Евгеньевна</lector>
+			<place>Ауд. 1405, Кронверкский пр., д.49, лит.А</place>
+		</lesson>
+		<lesson>
+			<name>Математический анализ</name>
+			<type>Лекция</type>
+			<time>10:00-11:30</time>
+			<lector>Холодова Светлана Евгеньевна</lector>
+			<place>Ауд. 1405, Кронверкский пр., д.49, лит.А</place>
+		</lesson>
+		<lesson>
+			<name>История русской культуры в контексте мировой культуры</name>
+			<type>Лекция</type>
+			<time>17:00-18:30</time>
+			<lector>Жиркова Галина Петровна</lector>
+		</lesson>
+		<lesson>
+			<name>История русской культуры в контексте мировой культуры</name>
+			<type>Практика</type>
+			<time>18:40-20:10</time>
+			<lector>Щеглова Иванна Павловна</lector>
+		</lesson>
+	</saturday>
+</days>

@@ -4,7 +4,8 @@ import parser.formal as formal
 import parser.regular as regular
 import time
 
-def create_xml(s, index):
+
+def create_xml(s, index=""):
     with open(f"schedule{index}.xml", "w") as new_file:
         new_file.write(s)
 
@@ -24,7 +25,9 @@ if __name__ == '__main__':
     with open("schedule.yaml") as file:
         s = file.read()
 
-    test(stupid.parse, s)
-    test(formal.parse, s)
-    test(regular.parse, s)
-    #test(ready.parse, s)
+    create_xml(regular.parse(s), "_regular")
+
+    # test(stupid.parse, s)
+    # test(formal.parse, s)
+    # test(regular.parse, s)
+    # test(ready.parse, s)
