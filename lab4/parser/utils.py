@@ -7,16 +7,6 @@ class Node:
         self.value = value
 
 
-def node_to_xml(node):
-    if not type(node.value) is list:
-        return f"{node.tag} - {node.value}\n"
-    else:
-        s = node.tag + ":\n"
-        for i in node.value:
-            s += add_tab(node_to_string(i))
-        return s
-
-
 def count_front_spaces(s):
     count = 0
     for c in s:

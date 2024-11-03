@@ -1,8 +1,8 @@
 from parser.utils import *
 
 
-def parse(file):
-    tree = parse_tree(file.read())[0]
+def parse(s):
+    tree = parse_tree(s)[0]
     xml = tree_to_xml(tree)
     return xml
 

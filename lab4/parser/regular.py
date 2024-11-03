@@ -1,14 +1,18 @@
 from parser.utils import remove_front_spaces, count_front_spaces
 import re
 
-def parse(file):
+def parse(s):
     xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
 
     spacing_list = []
     tag_list = []
+    pattern = re.compile(r"^(\s*)(.+?):(.*)$", flags=re.MULTILINE)
+    f = re.findall(pattern, s)
 
-    for line in file.readlines():
-        spacing = count_front_spaces(line.split(":", 1)[0])
+    for i in range(len(f)):
+        spacing = len(f[i][0])
+        tag = f[i][1]
+        value = f[i][2]
 
         if len(spacing_list) > 0:
             while spacing_list[-1] >= spacing:
@@ -16,7 +20,6 @@ def parse(file):
                 spacing_list.pop()
                 tag_list.pop()
 
-        tag = remove_front_spaces(line.split(":", 1)[0])
         if tag[0] == "-":
             tag = tag[2:]
             spacing += 2
@@ -24,8 +27,6 @@ def parse(file):
             if xml.split("\n")[-2] != " " * spacing_list[-1] + f"<{tag_list[-1]}>":
                 xml += " " * spacing_list[-1] + f"</{tag_list[-1]}>\n"
                 xml += " " * spacing_list[-1] + f"<{tag_list[-1]}>\n"
-
-        value = line.split(":", 1)[1][1:].split("\n", 1)[0]
 
         spacing_list.append(spacing)
         tag_list.append(tag)

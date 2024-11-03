@@ -1,13 +1,13 @@
 from parser.utils import remove_front_spaces, count_front_spaces
 
 
-def parse(file):
+def parse(s):
     xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
 
     spacing_list = []
     tag_list = []
 
-    for line in file.readlines():
+    for line in s.split("\n")[:-1]:
         spacing = count_front_spaces(line.split(":", 1)[0])
 
         if len(spacing_list) > 0:
@@ -25,7 +25,7 @@ def parse(file):
                 xml += " " * spacing_list[-1] + f"</{tag_list[-1]}>\n"
                 xml += " " * spacing_list[-1] + f"<{tag_list[-1]}>\n"
 
-        value = line.split(":", 1)[1][1:].split("\n", 1)[0]
+        value = line.split(":", 1)[1][1:]
 
         spacing_list.append(spacing)
         tag_list.append(tag)
