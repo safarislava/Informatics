@@ -12,7 +12,7 @@ def parse(s):
     for i in range(len(f)):
         spacing = len(f[i][0])
         tag = f[i][1]
-        value = f[i][2]
+        value = f[i][2][1:]
 
         if len(spacing_list) > 0:
             while spacing_list[-1] >= spacing:
