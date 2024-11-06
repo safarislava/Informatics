@@ -6,7 +6,7 @@ def parse(s):
 
     spacing_list = []
     tag_list = []
-    pattern = re.compile(r"^(\s*)(.+?):(.*)$", flags=re.MULTILINE)
+    pattern = re.compile(r"^(\s*)(.+?)(:.*|)$", flags=re.MULTILINE)
     f = re.findall(pattern, s)
 
     for i in range(len(f)):

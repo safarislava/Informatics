@@ -25,7 +25,10 @@ def parse(s):
                 xml += " " * spacing_list[-1] + f"</{tag_list[-1]}>\n"
                 xml += " " * spacing_list[-1] + f"<{tag_list[-1]}>\n"
 
-        value = line.split(":", 1)[1][1:]
+        if ":" in line:
+            value = line.split(":", 1)[1][1:]
+        else:
+            value = ""
 
         spacing_list.append(spacing)
         tag_list.append(tag)

@@ -25,7 +25,7 @@ if __name__ == '__main__':
     with open("schedule.yaml") as file:
         s = file.read()
 
-    create_xml(regular.parse(s), "_regular")
+    # create_xml(regular.parse(s), "_regular")
 
     # test(stupid.parse, s)
     # test(formal.parse, s)

@@ -30,7 +30,12 @@ def parse_tree(s, parent_tag=""):
             res.append(node)
             continue
 
-        value = parent.split(":", 1)[1]
+        if ":" in parent:
+            value = parent.split(":", 1)[1]
+        else:
+            node = Node(tag.split("\n")[0], "")
+            res.append(node)
+            continue
 
         if value.count("\n") == 1:
             node = Node(tag, value.split("\n", 1)[0][1:])
@@ -53,7 +58,9 @@ def parse_tree(s, parent_tag=""):
 
 def tree_to_xml(node):
     if not type(node.value) is list:
-        return f"<{node.tag}>{node.value}</{node.tag}>\n"
+        if node.value:
+            return f"<{node.tag}>{node.value}</{node.tag}>\n"
+        return f"<{node.tag}/>\n"
     else:
         s = f"<{node.tag}>\n"
         for i in node.value:
